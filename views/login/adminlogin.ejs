@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Admin Login</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <p class="navbar-brand">Admin Login</p>
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+      <!-- 6 -->
+	  <li><a href="/">Home</a></li>	
+      <li><a href="/userlogin">User Login</a></li>
+      <li><a href="/adminlogin">Admin login</a></li>
+      <li><a href="/register">Register User</a></li>
+    </ul>
+  </div>
+</nav>
+
+<body>
+
+  <div class="container">
+
+    <form action="/adminlogin" method="post">
+
+      <div class="col-sm-4">
+		  
+		<% if(message === 'Successfully Loged Out ✔' ){ %>
+        <div class="alert alert-success" role="alert">
+          <%=message%>
+        </div>
+        <% } %> 
+		  
+		<% if(message === 'Please login to view this page!'){ %>
+        <div class="alert alert-danger" role="alert">
+          <%=message%>
+        </div>
+        <% } %>  
+
+        <div class="form-group">
+          <label for="exampleInputEmail1">Username</label>
+          <input type="text" name="username" class="form-control" placeholder="Username">
+        </div>
+
+        <div class="form-group">
+          <label for="exampleInputPassword1">Password</label>
+          <input type="password" name="password" class="form-control" placeholder="Password">
+        </div>
+
+        <% if(message === 'Incorrect Username and/or Password!' || message === 'Please enter Username and Password!'){ %>
+        <div class="alert alert-danger" role="alert">
+          <%=message%>
+        </div>
+        <% } %>
+
+        <button type="submit" class="btn btn-primary">Login</button>
+
+      </div>
+
+    </form>
+
+  </div>
+
+</body>
+
+</html>

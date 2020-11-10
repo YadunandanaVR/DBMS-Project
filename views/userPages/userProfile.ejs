@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>User Profile</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+  <div class="container">
+
+    <a class="navbar-brand"> Profile </a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+      <ul class="navbar-nav ml-auto">
+
+        <li class="nav-item">
+          <a class="nav-link" href="/userAccountSummary">Account Summary</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="/userProfile">Profile</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="/userViewBill">View/Pay Bill</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="/userBillingHistory">Billing History</a>
+        </li>
+
+
+        <li class="nav-item"><a class="nav-link" href="/userlogout">Logout</a></li>
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<body>
+
+  <div class="container" style="margin-top: 30px;">
+
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <h1 class="display-4">User Details</h1>
+        <hr class="my-4">
+
+        <form action="/userProfileUpdate" method="post">
+
+          <div class="col-sm-4">
+
+            <div class="form-group">
+
+              <div class="form-group">
+                <label>Username</label>
+                <input type="text" name="username" class="form-control" placeholder="username" autocomplete="off" value="<%= user_data[0].user_name  %>" disabled>
+              </div>
+
+              <div class="form-group">
+                <label>Email</label>
+                <input type="email" name="email" class="form-control" placeholder="Email" value="<%= user_data[0].user_email %>" autocomplete="off" disabled>
+              </div>
+
+              <div class="form-group">
+                <label>password</label>
+                <input type="text" name="password" class="form-control" placeholder="Password" value="<%= user_data[0].user_password %>" autocomplete="off">
+              </div>
+
+              <div class="form-group">
+                <label>First Name</label>
+                <input type="text" name="first_name" class="form-control" placeholder="First Name" value="<%= customer_data[0].customer_fname %>" autocomplete="off">
+              </div>
+
+              <div class="form-group">
+                <label>Last Name</label>
+                <input type="text" name="last_name" class="form-control" placeholder="Last Name" value="<%= customer_data[0].customer_lname %>" autocomplete="off">
+              </div>
+
+              <div class="form-group">
+                <label>Phone Number</label>
+                <input type="text" name="phon_no" class="form-control" placeholder="Phone Number" value="<%= customer_data[0].customer_phone_number%>" autocomplete="off" disabled>
+              </div>
+
+              <div class="form-group">
+                <label>Address</label>
+                <input type="text" name="address" class="form-control" placeholder="Address" value="<%= customer_data[0].customer_address%>" autocomplete="off">
+              </div>
+
+              <div class="form-group">
+                <label>City</label>
+                <input type="text" name="city" class="form-control" placeholder="City" value="<%= customer_data[0].customer_city%>" autocomplete="off">
+              </div>
+
+              <div class="form-group">
+                <label>State</label>
+                <input type="text" name="state" class="form-control" placeholder="State" value="<%= customer_data[0].customer_state%>" autocomplete="off">
+              </div>
+
+              <div class="form-group">
+                <label>Pincode</label>
+                <input type="text" name="pincode" class="form-control" placeholder="Pincode" value="<%= customer_data[0].customer_pincode%>" autocomplete="off">
+              </div>
+
+              <button type="submit" class="btn btn-primary"> Update </button>
+
+            </div>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</body>
+
+</html>

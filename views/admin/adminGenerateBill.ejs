@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Admin Panel</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+  <div class="container">
+
+    <a class="navbar-brand"> Generate Bill </a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+      <ul class="navbar-nav ml-auto">
+
+        <li class="nav-item">
+          <a class="nav-link" href="/adminAddUsers">Create Account</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="/adminUpdateUser">Update Account</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="/adminRemoveUsers">Remove Account</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="/adminGenerateBill">Generate Bill</a>
+        </li>
+
+        <li class="nav-item dropdown">
+
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            View
+          </a>
+
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+            <a class="dropdown-item" href="/adminSelectAccounts">Accounts</a>
+            <a class="dropdown-item" href="/adminSelectUsers">Users</a>
+            <a class="dropdown-item" href="/adminSelectCustomers">Customers</a>
+            <a class="dropdown-item" href="/adminSelectFeedbacks">Feedbacks</a>
+
+          </div>
+        </li>
+
+        <li class="nav-item"><a class="nav-link" href="/adminlogout">Logout</a></li>
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<body>
+
+  <div class="container" style="margin-top: 30px;">
+
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <h1 class="display-4">Generate Bill</h1>
+        <hr class="my-4">
+
+        <form action="/adminGenerateBill" method="post">
+
+          <div class="col-sm-4">
+
+            <div class="form-group">
+
+              <% if(message === 'Bill Successfully Generated' ){ %>
+              <div class="alert alert-success" role="alert">
+                <%=message%>
+              </div>
+              <% } %>
+
+              <% if(message === 'Account Number does not exists' ){ %>
+              <div class="alert alert-danger" role="alert">
+                <%=message%>
+              </div>
+              <% } %>
+				
+			  <% if(message === 'Invalid rr_no!' ){ %>
+              <div class="alert alert-danger" role="alert">
+                <%=message%>
+              </div>
+              <% } %>	
+				
+			  <% if(message === 'Invalid Readings! -> (pres_reading must be > prev_reading)' ){ %>
+              <div class="alert alert-danger" role="alert">
+                <%=message%>
+              </div>
+              <% } %>	
+
+              <div class="form-group">
+                <label>Account Number</label>
+                <input type="text" name="account_no" class="form-control" placeholder="Account Number" autocomplete="off">
+              </div>
+
+              <div class="form-group">
+                <label>RR Number</label>
+                <input type="text" name="rr_no" class="form-control" placeholder="rr number" autocomplete="off">
+              </div>
+				
+			  <div class="form-group">
+                <label>Previous Reading</label>
+                <input type="text" name="prev_read" class="form-control" placeholder="Previous Reading" autocomplete="off">
+              </div>
+
+              <div class="form-group">
+                <label>Present Reading</label>
+                <input type="text" name="pres_read" class="form-control" placeholder="Present Reading" autocomplete="off">
+              </div>	
+
+              <!-- <div class="form-group">
+                <label>Consumptions Unit</label>
+                <input type="text" name="consumption_unit" class="form-control" placeholder="Consumptions Unit" autocomplete="off">
+              </div> -->
+
+              <!-- <div class="form-group">
+                <label>Bill Amount</label>
+                <input type="text" name="bill_amount" class="form-control" placeholder="Bill Amount" autocomplete="off">
+              </div> -->
+
+              <div class="form-group">
+                <label>Tax</label>
+                <input type="text" name="tax" class="form-control" placeholder="Tax" value="40" autocomplete="off">
+              </div>
+
+              <!-- <div class="form-group">
+                <label>Due Date</label>
+                <input type="date" name="Due Date" class="form-control" placeholder="due_date" autocomplete="off">
+              </div> -->
+
+              <button type="submit" class="btn btn-primary"> Submit </button>
+
+            </div>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</body>
+
+</html>

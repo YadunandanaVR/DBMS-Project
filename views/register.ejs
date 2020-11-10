@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Registration Form</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <p class="navbar-brand">Registration Form</p>
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+      <!-- 6 -->
+      <li><a href="/userlogin">Login</a></li>
+      <li><a href="/">Home</a></li>
+      <li><a href="/contact">CONTACT US</a></li>
+    </ul>
+  </div>
+</nav>
+
+<body>
+  <div class="container">
+
+
+    <h1>
+      Register
+    </h1>
+
+    <form action="/register" method="post">
+
+      <div class="col-sm-4">
+		  
+		<% if(message === 'No fields should not be left empty!'){ %>
+        <div class="alert alert-danger" role="alert">
+          <%=message%>
+        </div>
+        <% } %>   
+
+        <div class="form-group">
+          <label for="formGroupExampleInput2">Username</label>
+          <input type="text" name="username" class="form-control" placeholder="username" autocomplete="off">
+        </div>
+
+        <% if(message === 'Username already taken'){ %>
+        <div class="alert alert-danger" role="alert">
+          <%=message%>
+        </div>
+        <% } %>
+
+        <div class="form-group">
+          <label for="formGroupExampleInput2">Email</label>
+          <input type="text" name="email" class="form-control" placeholder="Email" autocomplete="off">
+        </div>
+
+        <% if(message === 'Email already exists'){ %>
+        <div class="alert alert-danger" role="alert">
+          <%=message%>
+        </div>
+        <% } %>
+
+        <div class="form-group">
+          <label for="formGroupExampleInput2">password</label>
+          <input type="text" name="password" class="form-control" placeholder="Password" autocomplete="off">
+        </div>
+
+        <div class="form-group">
+          <label for="formGroupExampleInput2">Account Number</label>
+          <input type="text" name="account_no" class="form-control" placeholder="Account Number" autocomplete="off">
+        </div>
+
+        <% if(message === 'Invalid account no'){ %>
+        <div class="alert alert-danger" role="alert">
+          <%=message%>
+        </div>
+        <% } %>
+		  
+		<% if(message === 'Entered Account Number already registered!'){ %>
+        <div class="alert alert-danger" role="alert">
+          <%=message%>
+        </div>
+        <% } %>  
+
+        <div class="form-group">
+          <label for="formGroupExampleInput">First Name</label>
+          <input type="text" name="first_name" class="form-control" placeholder="First Name" autocomplete="off">
+        </div>
+
+        <div class="form-group">
+          <label for="formGroupExampleInput2">Last Name</label>
+          <input type="text" name="last_name" class="form-control" placeholder="Last Name" autocomplete="off">
+        </div>
+
+        <div class="form-group">
+          <label for="formGroupExampleInput2">Phone Number</label>
+          <input type="text" name="phon_no" class="form-control" placeholder="Phone Number" autocomplete="off">
+        </div>
+		  
+		<% if(message === 'Phone Number already exists'){ %>
+        <div class="alert alert-danger" role="alert">
+          <%=message%>
+        </div>
+        <% } %> 
+
+        <div class="form-group">
+          <label for="formGroupExampleInput2">Address</label>
+          <input type="text" name="address" class="form-control" placeholder="Address" autocomplete="off">
+        </div>
+
+        <div class="form-group">
+          <label for="formGroupExampleInput2">City</label>
+          <input type="text" name="city" class="form-control" placeholder="City" autocomplete="off">
+        </div>
+
+        <div class="form-group">
+          <label for="formGroupExampleInput2">State</label>
+          <input type="text" name="state" class="form-control" placeholder="State" autocomplete="off">
+        </div>
+
+        <div class="form-group">
+          <label for="formGroupExampleInput2">Pincode</label>
+          <input type="text" name="pincode" class="form-control" placeholder="Pincode" autocomplete="off">
+        </div>
+
+        <button type="submit" class="btn btn-primary"> Submit </button>
+
+      </div>
+
+    </form>
+
+  </div>
+
+</body>
+
+</html>
