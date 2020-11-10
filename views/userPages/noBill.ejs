@@ -13,7 +13,7 @@
 
   <div class="container">
 
-    <a class="navbar-brand"> <%= message  %> </a>
+    <a class="navbar-brand"> <%= message %></a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -24,12 +24,12 @@
       <ul class="navbar-nav ml-auto">
 
         <li class="nav-item">
-          <a class="nav-link" href="/userAccountSummary">Account Summary</a>
+          <a class="nav-link" href="/userAccountSummary">Home</a>
         </li>
 
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link" href="/userProfile">Profile</a>
-        </li>
+        </li> -->
 
         <li class="nav-item">
           <a class="nav-link" href="/userViewBill">View/Pay Bill</a>
@@ -39,8 +39,20 @@
           <a class="nav-link" href="/userBillingHistory">Billing History</a>
         </li>
 
+        <li class="nav-item dropdown">
 
-        <li class="nav-item"><a class="nav-link" href="/userlogout">Logout</a></li>
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <%= username %>
+          </a>
+
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+            <a class="dropdown-item" href="/userProfile">Profile</a>
+            <a class="dropdown-item" href="/userFeedback">Give FeedBack</a>
+            <a class="dropdown-item" href="/userlogout">Logout</a>
+
+          </div>
+        </li>
 
       </ul>
     </div>

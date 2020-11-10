@@ -13,7 +13,7 @@
 
   <div class="container">
 
-    <a class="navbar-brand"> <%= message %> </a>
+    <a class="navbar-brand"> Feedback </a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -60,53 +60,37 @@
 </nav>
 
 <body>
+
   <div class="container" style="margin-top: 30px;">
     <div class="jumbotron">
       <div class="container">
-        <h3 class="display-4">Account Details </h3>
-        <hr class="my-4">
-        <table class="table table-bordered table-hover">
-          <tbody>
 
-            <% profile.forEach(function(data){ %>
+        <form action="/userFeedback" method="post">
 
-            <tr>
-              <th scope="row"> Account Number </th>
-              <td> <%= data.account_number %> </td>
-            </tr>
+          <div class="col-sm-6">
 
-            <tr>
-              <th scope="row">First Name</th>
-              <td> <%= data.account_holder_fname  %> </td>
-            </tr>
+            <h3 class="display-7"> Give Feedback </h3>
+            <hr class="my-4">
 
-            <tr>
-              <th scope="row">Last Name</th>
-              <td> <%= data.account_holder_lname %> </td>
-            </tr>
-			  
-			<tr>
-              <th scope="row">DOB</th>
-              <td> <%= data.account_holder_DOB %> </td>
-            </tr>  
+            <% if(message === 'Feedback Successfully Submitted ✔' ){ %>
+            <div class="alert alert-success" role="alert">
+              <%=message%>
+            </div>
+            <% } %>
 
-            <tr>
-              <th scope="row">Address</th>
-              <td> <%= data.account_holder_address %> </td>
-            </tr>
-
-            <%  })  %>
-
-            <tr>
-              <th scope="row">Board Name</th>
-              <td> <%= boardName %> </td>
-            </tr>
-
-          </tbody>
-        </table>
+            <form action="/userFeedback" method="post">
+              <div class="form-group">
+                <label>Name</label>
+                <input class="form-control" type="text" name="name" placeholder="Name">
+                <label>Feedback</label>
+                <textarea class="form-control" name="feedback" rows="5" cols="30" placeholder="Give Your Feedback Here"></textarea>
+              </div>
+              <button class="btn btn-primary" type="submit" name="button">Submit</button>
+            </form>
+          </div>
+        </form>
       </div>
     </div>
-
   </div>
 
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

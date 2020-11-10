@@ -431,7 +431,7 @@ app.get('/adminSelectAccounts', function(req, res) {
 app.get('/adminSelectUsers', function(req, res) {
 
   if (req.session.loggedin) {
-    var q = 'SELECT * FROM users';
+    var q = "SELECT user_name, user_account_number, user_email, user_password, DATE_FORMAT(created_at, '%d-%m-%Y') AS created_at FROM users";
 
     connection.query(q, function(error, result) {
       if (error) throw error;
@@ -636,7 +636,8 @@ app.get('/userAccountSummary', function(req, res) {
             res.render('userPages/accountSummary', {
               message: message,
               profile: profileResult,
-              boardName: boardResult[0].electric_board_name
+              boardName: boardResult[0].electric_board_name,
+              username: username
             });
           });
         });
@@ -672,7 +673,8 @@ app.get('/userProfile', function(req, res) {
           res.render('userPages/userProfile', {
             message: message,
             user_data: userResult,
-            customer_data: customerResult
+            customer_data: customerResult,
+            username: username
           });
         });
       });
@@ -752,12 +754,14 @@ app.get('/userViewBill', function(req, res) {
             if (error) throw error;
             res.render('userPages/viewBill', {
               bill_data: result,
+              username: username
             });
           });
         } else {
           res.render('userPages/noBill', {
             message: 'View/Pay Bill',
-            alertMessage: ''
+            alertMessage: '',
+            username: username
           });
         }
       });
@@ -811,7 +815,8 @@ app.post('/userViewBill', function(req, res) {
         } else {
           res.render('userPages/noBill', {
             message: 'View/Pay Bill',
-            alertMessage: 'Invalid Bill Number please check the bill Number'
+            alertMessage: 'Invalid Bill Number please check the bill Number',
+            username: username
           });
         }
       });
@@ -828,9 +833,11 @@ app.post('/userViewBill', function(req, res) {
 app.get('/noBill', function(req, res) {
   if (req.session.loggedin) {
     var message = 'Welcome back, ' + req.session.username + '!';
+    var username = req.session.username;
     res.render('userPages/noBill', {
       message: '',
-      alertMessage: ''
+      alertMessage: '',
+      username: username
     });
   } else {
     res.render('login/login', {
@@ -866,13 +873,15 @@ app.get('/userBillingHistory', function(req, res) {
 
             res.render('userPages/billingHistory', {
               message: message,
-              bill_data: result
+              bill_data: result,
+              username: username
             });
           });
         } else {
           res.render('userPages/noBill', {
             message: 'Billing History',
-            alertMessage: ''
+            alertMessage: '',
+            username: username
           });
         }
       });
@@ -882,6 +891,56 @@ app.get('/userBillingHistory', function(req, res) {
       message: 'Please login to view this page!'
     });
   }
+});
+
+
+//  --------------- Feedback page
+
+app.get('/userFeedback', function(req, res) {
+  if (req.session.loggedin) {
+    var username = req.session.username;
+    res.render('userPages/userFeedback', {
+      message: '',
+      username: username
+    });
+  } else {
+    res.render('login/login', {
+      message: 'Please login to view this page!'
+    });
+  }
+});
+
+
+app.post('/userFeedback', function(req, res) {
+  if (req.session.loggedin) {
+    var username = req.session.username;
+
+    var q1 = 'SELECT user_account_number FROM users WHERE user_name = ?';
+    connection.query(q1, [username], function(error, result) {
+      if (error) throw error;
+      var account_number = result[0].user_account_number;
+
+      var feedback_data = {
+        customer_name: req.body.name,
+        feedback_desc: req.body.feedback,
+        account_number: account_number
+      }
+
+      var q2 = 'INSERT INTO feedbacks SET ?';
+      connection.query(q2, [feedback_data], function(error, feedback_result) {
+        if (error) throw error;
+        res.render('userPages/userFeedback', {
+          message: 'Feedback Successfully Submitted ✔',
+          username: username
+        });
+      });
+    });
+  } else {
+    res.render('login/login', {
+      message: 'Please login to view this page!'
+    });
+  }
+
 });
 
 
