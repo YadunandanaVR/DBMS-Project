@@ -22,7 +22,13 @@ app.use(session({
 var connection = mysql.createConnection({
   host: process.env.HOST_NAME,
   user: process.env.USER_NAME,
+  password: process.env.USER_PASSWORD,	
   database: process.env.DATABASE_NAME
+});
+
+connection.connect(function(error){
+	if (error) throw error;
+	console.log('MqSql Connected');
 });
 
 
