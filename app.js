@@ -319,8 +319,8 @@ app.post('/adminGenerateBill', function(req, res) {
           if (error) throw error;
           var add_due_date = add_result[0].due_date;
 
-          var q3 = 'SELECT rr_no FROM bills WHERE account_number = ? HAVING rr_no = ?';
-          connection.query(q3, [account_number, req.body.rr_no], function(error, rr_result) {
+          var q3 = 'SELECT rr_number FROM accounts WHERE account_number = ?';
+          connection.query(q3, [account_number], function(error, rr_result) {
             if (error) throw error;
 
             if (rr_result.length > 0) {
