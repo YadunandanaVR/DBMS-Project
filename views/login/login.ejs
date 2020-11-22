@@ -2,77 +2,99 @@
 <html lang="en" dir="ltr">
 
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta charset="utf-8">
-  <title>User Login</title>
-  <meta charset="utf-8">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" href="/css/styles.css">
+  <title>User login</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link href="styles.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat|Ubuntu" rel="stylesheet">
 </head>
-<nav class="navbar navbar-default">
+
+<nav class="navbar navbar-dark bg-dark navbar-expand-lg">
+
   <div class="container">
-    <div class="navbar-header">
-      <p class="navbar-brand">User Login</p>
+
+    <a class="navbar-brand"> User Login </a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+      <ul class="navbar-nav ml-auto">
+
+        <li class="nav-item">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="/userlogin">User login</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="/adminlogin">Admin login</a>
+        </li>
+		  
+		<li class="nav-item">
+			<a class="nav-link" href="/register">Register</a>
+		</li>
+
+      </ul>
     </div>
-    <ul class="nav navbar-nav navbar-right">
-      <!-- 6 -->
-	  <li><a href="/">Home</a></li>	
-      <li><a href="/userlogin">User Login</a></li>
-      <li><a href="/adminlogin">Admin login</a></li>
-      <li><a href="/register">Register User</a></li>
-    </ul>
   </div>
 </nav>
 
-<body>
 
-  <div class="container mt-4">
+<body class="body1 body_login">
+	
+  <form class="form-signin" action="/userlogin" method="post">
+    <div class="text-center mb-4">
+      <img class="mb-4" src="img/avatar.svg" alt="" width="72" height="72">
+      <h1 class="h1 mb-3 font-weight-bold login_h1">User Login</h1>
+    </div>
 
-    <form action="/userlogin" method="post">
+    <% if(message === 'User successfully Registered' ){ %>
+    <div class="alert alert-success" role="alert">
+      <%=message%>
+    </div>
+    <% } %>
 
-      <div class="col-sm-4">
-		  
-		<% if(message === 'User successfully Registered' ){ %>
-        <div class="alert alert-success" role="alert">
-          <%=message%>
-        </div>
-        <% } %>   
-		 
-		<% if(message === 'Successfully Loged Out ✔' ){ %>
-        <div class="alert alert-success" role="alert">
-          <%=message%>
-        </div>
-        <% } %> 
-		  
-		<% if(message === 'Please login to view this page!'){ %>
-        <div class="alert alert-danger" role="alert">
-          <%=message%>
-        </div>
-        <% } %>  
+    <% if(message === 'Successfully Loged Out ✔' ){ %>
+    <div class="alert alert-success" role="alert">
+      <%=message%>
+    </div>
+    <% } %>
 
-        <div class="form-group">
-          <label for="exampleInputEmail1">Username</label>
-          <input type="text" name="username" class="form-control" placeholder="Username">
-        </div>
+    <% if(message === 'Please login to view this page!'){ %>
+    <div class="alert alert-danger" role="alert">
+      <%=message%>
+    </div>
+    <% } %>
 
-        <div class="form-group">
-          <label for="exampleInputPassword1">Password</label>
-          <input type="password" name="password" class="form-control" placeholder="Password">
-        </div>
+    <div class="form-label-group">
+      <input type="text" id="inputEmail" name="username" class="form-control" placeholder="Email address" autocomplete="off" autofocus>
+      <label for="inputEmail">Username</label>
+    </div>
 
-        <% if(message === 'Incorrect Username and/or Password!' || message === 'Please enter Username and Password!'){ %>
-        <div class="alert alert-danger" role="alert">
-          <%=message%>
-        </div>
-        <% } %> 
+    <div class="form-label-group">
+      <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password">
+      <label for="inputPassword">Password</label>
+    </div>
 
-        <button type="submit" class="btn btn-primary">Login</button>
+    <% if(message === 'Incorrect Username and/or Password!' || message === 'Please enter Username and Password!'){ %>
+    <div class="alert alert-danger" role="alert">
+      <%=message%>
+    </div>
+    <% } %>
 
-      </div>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+  </form>
 
-    </form>
 
-  </div>
-
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 
 </html>
