@@ -1,51 +1,121 @@
-nav{
-	margin-bottom: 150px;
+/* -------------------------------------------My CSS -------------------------------------- */
+nav {
+  margin-bottom: 10px;
 }
 
-.navbar{
-	color: #eeeded;
+.navbar {
+  color: #e8e8e8;
 }
 
 .navbar-brand {
   font-family: "Ubuntu";
-  font-size: 2.5rem;
+  font-size: 1.5rem;
+}
+
+.user-brand {
+  font-family: "Ubuntu";
+  font-size: 1.5rem;
+}
+
+.body_welcome {
+  padding-top: 70px;
+  background-image: url("img/powergrid-city.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.jumbotron_welcome {
+  background: none
+}
+
+.welcome_h1 {
+  font-size: 4.5rem;
   font-weight: bold;
 }
 
-.body_welcome{
-	background-image: url("img/body.png");
-	background-repeat: no-repeat;
-	background-size: cover;
-	background-position: center;
-	background-attachment: fixed;
+.welcome_p {
+  font-size: 2.5rem;
+  color: #214252;
 }
 
-.jumbotron_welcome{
-    background: none
+.body_login {
+  padding-top: 150px;
+  background-image: url("img/es_grid.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 }
 
-.welcome_h1{
-	font-size: 4.5rem;
-	font-weight: bold;
+.body-user {
+  padding-top: 150px;
+  background-image: url("img/Grid2.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 }
 
-.welcome_p{
-	font-size: 2.5rem;
-	color: #214252;
+.body-user-profile {
+  padding-top: 70px;
+  background-image: url("img/Grid2.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 }
 
-.body_login{
-	background-image: url("img/login2.jfif");
-	background-repeat: no-repeat;
-	background-size: cover;
-	background-position: center;
-	background-attachment: fixed;
+.body-register {
+  padding-top: 70px;
+  background-image: url("img/es_grid.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 }
 
-.login_h1{
-	color: #fff;
+.jumbotron_register {
+  background: none
 }
 
+.label-register {
+  color: #fff;
+}
+
+.login_h1 {
+  color: #fff;
+}
+
+.body-admin-pages {
+  padding-top: 70px;
+  background-image: url("img/es_grid.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.admin-select-jumbo {
+  background-color: #30475e;
+  opacity: 0.9;
+}
+
+.admin-select-td {
+  color: #eeeeee;
+}
+
+.user-jumbo{
+	opacity: 0.8;
+}
+
+
+input{
+	opacity: 0.8;
+}
+
+/* ------------------------------------------------Bootstrap CSS -------------------------------------------------- */
 :root {
   --input-padding-x: .75rem;
   --input-padding-y: .75rem;
@@ -83,18 +153,19 @@ body1 {
   margin-bottom: 1rem;
 }
 
-.form-label-group > input,
-.form-label-group > label {
+.form-label-group>input,
+.form-label-group>label {
   padding: var(--input-padding-y) var(--input-padding-x);
 }
 
-.form-label-group > label {
+.form-label-group>label {
   position: absolute;
   top: 0;
   left: 0;
   display: block;
   width: 100%;
-  margin-bottom: 0; /* Override default `<label>` margin */
+  margin-bottom: 0;
+  /* Override default `<label>` margin */
   line-height: 1.5;
   color: #495057;
   border: 1px solid transparent;
@@ -127,7 +198,7 @@ body1 {
   padding-bottom: calc(var(--input-padding-y) / 3);
 }
 
-.form-label-group input:not(:placeholder-shown) ~ label {
+.form-label-group input:not(:placeholder-shown)~label {
   padding-top: calc(var(--input-padding-y) / 3);
   padding-bottom: calc(var(--input-padding-y) / 3);
   font-size: 12px;

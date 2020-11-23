@@ -2,14 +2,16 @@
 <html lang="en" dir="ltr">
 
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta charset="utf-8">
-  <title>Admin Panel</title>
+  <title>Admin panel</title>
   <meta charset="utf-8">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat|Ubuntu" rel="stylesheet">
 </head>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar fixed-top navbar-dark bg-dark navbar-expand-lg">
 
   <div class="container">
 
@@ -34,10 +36,10 @@
         <li class="nav-item">
           <a class="nav-link" href="/adminRemoveUsers">Remove Account</a>
         </li>
-		  
-		<li class="nav-item">
+
+        <li class="nav-item">
           <a class="nav-link" href="/adminGenerateBill">Generate bill</a>
-        </li>  
+        </li>
 
         <li class="nav-item dropdown">
 
@@ -54,45 +56,49 @@
 
           </div>
         </li>
-		  
-		<li class="nav-item"><a class="nav-link" href="/adminlogout">Logout</a></li>
-		    
+
+        <li class="nav-item"><a class="nav-link" href="/adminlogout">Logout</a></li>
+
       </ul>
     </div>
   </div>
 </nav>
 
-<body>
+<body class="body-admin-pages">
   <div class="container" style="margin-top: 30px;">
+    <div class="jumbotron admin-select-jumbo">
+      <div class="container">
 
-    <table class="table table-bordered table-hover">
-      <thead class="thead-dark">
-        <tr>
-          <th scope="col">Id</th>
-          <th scope="col">Username</th>
-          <th scope="col">Account_no</th>
-          <th scope="col">Email</th>
-          <th scope="col">Password</th>
-          <th scope="col">Registered_on</th>
-        </tr>
-      </thead>
+        <table class="table table-responsive table-bordered table-hover">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col" style="width: 15%;">Id</th>
+              <th scope="col" style="width: 15%;">Username</th>
+              <th scope="col" style="width: 15%;">Account_no</th>
+              <th scope="col" style="width: 35%;">Email</th>
+              <th scope="col">Password</th>
+              <th scope="col">Registered_on</th>
+            </tr>
+          </thead>
 
-      <tbody>
+          <tbody>
 
-        <%	users_data.forEach(function(data){ %>
-        <tr>
-          <td> <%= data.user_id %> </td>
-          <td> <%= data.user_name %> </td>
-          <td> <%= data.user_account_number %> </td>
-          <td> <%= data.user_email %> </td>
-          <td> <%= data.user_password %> </td>
-          <td> <%= data.created_at %> </td>
-        </tr>
-        <% })%>
+            <%	users_data.forEach(function(data){ %>
+            <tr>
+              <td class="admin-select-td"> <%= data.user_id %> </td>
+              <td class="admin-select-td"> <%= data.user_name %> </td>
+              <td class="admin-select-td"> <%= data.user_account_number %> </td>
+              <td class="admin-select-td"> <%= data.user_email %> </td>
+              <td class="admin-select-td"> <%= data.user_password %> </td>
+              <td class="admin-select-td"> <%= data.created_at %> </td>
+            </tr>
+            <% })%>
 
-      </tbody>
-    </table>
+          </tbody>
+        </table>
 
+      </div>
+    </div>
   </div>
 
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

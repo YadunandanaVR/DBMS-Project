@@ -22,13 +22,13 @@ app.use(session({
 var connection = mysql.createConnection({
   host: process.env.HOST_NAME,
   user: process.env.USER_NAME,
-  password: process.env.USER_PASSWORD,	
+  password: process.env.USER_PASSWORD,
   database: process.env.DATABASE_NAME
 });
 
-connection.connect(function(error){
-	if (error) throw error;
-	console.log('MqSql Connected');
+connection.connect(function(error) {
+  if (error) throw error;
+  console.log('MqSql Connected');
 });
 
 
@@ -437,7 +437,7 @@ app.get('/adminSelectAccounts', function(req, res) {
 app.get('/adminSelectUsers', function(req, res) {
 
   if (req.session.loggedin) {
-    var q = "SELECT user_name, user_account_number, user_email, user_password, DATE_FORMAT(created_at, '%d-%m-%Y') AS created_at FROM users";
+    var q = "SELECT user_id,user_name, user_account_number, user_email, user_password, DATE_FORMAT(created_at, '%d-%m-%Y') AS created_at FROM users";
 
     connection.query(q, function(error, result) {
       if (error) throw error;
