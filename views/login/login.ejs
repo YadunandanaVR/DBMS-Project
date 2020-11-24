@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta charset="utf-8">
   <title>User login</title>
+  <link rel="icon" href="img/electric-tower.png">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link href="styles.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Montserrat|Ubuntu" rel="stylesheet">
@@ -55,19 +56,19 @@
     </div>
 
     <% if(message === 'User successfully Registered' ){ %>
-    <div class="alert alert-success" role="alert">
+    <div class="alert alert-success alert" role="alert">
       <%=message%>
     </div>
     <% } %>
 
     <% if(message === 'Successfully Loged Out ✔' ){ %>
-    <div class="alert alert-success" role="alert">
+    <div class="alert alert-success alert" role="alert">
       <%=message%>
     </div>
     <% } %>
 
     <% if(message === 'Please login to view this page!'){ %>
-    <div class="alert alert-danger" role="alert">
+    <div class="alert alert-danger alert" role="alert">
       <%=message%>
     </div>
     <% } %>
@@ -83,12 +84,13 @@
     </div>
 
     <% if(message === 'Incorrect Username and/or Password!' || message === 'Please enter Username and Password!'){ %>
-    <div class="alert alert-danger" role="alert">
+    <div class="alert alert-danger alert" role="alert">
       <%=message%>
     </div>
     <% } %>
 
     <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+	<!-- <p class="mt-5 mb-3 text-center login_p">&copy; 2020-2021</p> -->
   </form>
 
 
