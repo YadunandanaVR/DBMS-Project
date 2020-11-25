@@ -54,7 +54,7 @@
 
         <form action="/register" method="post">
 
-          <div class="col-sm-4">
+          <div class="col-sm-5">
 
             <% if(message === 'No fields should not be left empty!'){ %>
             <div class="alert alert-danger" role="alert">
@@ -64,8 +64,19 @@
 
             <div class="form-group">
               <label class="label-register" for="formGroupExampleInput2">Username</label>
-              <input type="text" name="username" class="form-control input-op" placeholder="username" autocomplete="off">
+              <input type="text" name="username" class="form-control input-op" placeholder="Username" autocomplete="off">
             </div>
+			  
+			<div class="form-group">
+              <label class="label-register" for="formGroupExampleInput2">Re-Enter-Username</label>
+              <input type="text" name="reenter_username" class="form-control input-op" placeholder="Re-Enter Username" autocomplete="off">
+            </div>
+			  
+			<% if(message === 'Usernames does not match.'){ %>
+            <div class="alert alert-danger" role="alert">
+              <%=message%>
+            </div>
+            <% } %>
 
             <% if(message === 'Username already taken'){ %>
             <div class="alert alert-danger" role="alert">
@@ -85,9 +96,20 @@
             <% } %>
 
             <div class="form-group">
-              <label class="label-register" for="formGroupExampleInput2">password</label>
+              <label class="label-register" for="formGroupExampleInput2">Password</label>
               <input type="text" name="password" class="form-control input-op" placeholder="Password" autocomplete="off">
             </div>
+			  
+			<div class="form-group">
+              <label class="label-register" for="formGroupExampleInput2">Re-Enter-Password</label>
+              <input type="text" name="reenter_password" class="form-control input-op" placeholder="Re-Enter-Password" autocomplete="off">
+            </div>
+			 
+			<% if(message === 'Passwords does not match.'){ %>
+            <div class="alert alert-danger" role="alert">
+              <%=message%>
+            </div>
+            <% } %>
 
             <div class="form-group">
               <label class="label-register" for="formGroupExampleInput2">Account Number</label>

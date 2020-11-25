@@ -545,6 +545,18 @@ app.post('/register', function(req, res) {
           message: 'Username already taken'
         });
       }
+		
+	  if (req.body.username != req.body.reenter_username){
+		  return res.render('register', {
+          message: 'Usernames does not match.'
+        });
+	  }
+		
+	  if (req.body.password != req.body.reenter_password){
+		  return res.render('register', {
+          message: 'Passwords does not match.'
+        });
+	  }
 
       connection.query(q1, [req.body.email], function(error, result) {
         if (error) {
