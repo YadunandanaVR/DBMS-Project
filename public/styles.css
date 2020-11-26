@@ -115,9 +115,24 @@ nav {
 	opacity: 0.8;
 }
 
+.user_profile_jumbo{
+	margin-top: 80px;
+	padding: 30px;
+	opacity: 0.8;
+}
+
+.register_jumbo{
+	margin-top: 80px;
+	padding: 30px;
+	opacity: 0.8;
+}
 
 input, textarea{
 	opacity: 0.8;
+}
+
+.user_profile_label{
+	font-weight: bold
 }
 
 /* ------------------------------------------------Bootstrap CSS -------------------------------------------------- */

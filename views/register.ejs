@@ -47,131 +47,184 @@
 
   <div class="container">
 
-    <div class="jumbotron jumbotron_register">
+    <div class="jumbotron register_jumbo">
       <div class="container">
-        <h1 class="display-4 login_h1">Register</h1>
+        <h1 class="display-4">Register</h1>
         <hr class="my-4">
 
         <form action="/register" method="post">
 
-          <div class="col-sm-5">
+          <% if(message === 'No fields should not be left empty!'){ %>
+          <div class="alert alert-danger col-sm-10 my-1" role="alert">
+            <%=message%>
+          </div>
+          <% } %>
 
-            <% if(message === 'No fields should not be left empty!'){ %>
-            <div class="alert alert-danger" role="alert">
-              <%=message%>
-            </div>
-            <% } %>
+          <div class='row'>
 
-            <div class="form-group">
-              <label class="label-register" for="formGroupExampleInput2">Username</label>
-              <input type="text" name="username" class="form-control input-op" placeholder="Username" autocomplete="off">
-            </div>
-
-            <div class="form-group">
-              <label class="label-register" for="formGroupExampleInput2">Re-Enter-Username</label>
-              <input type="text" name="reenter_username" class="form-control input-op" placeholder="Re-Enter Username" autocomplete="off">
+            <div class='col-sm-5 my-1'>
+              <div class="form-group">
+                <label class='user_profile_label'>Username</label>
+                <input type="text" name="username" class="form-control input-op" placeholder="Username" autocomplete="off">
+              </div>
             </div>
 
-            <% if(message === 'Usernames does not match.'){ %>
-            <div class="alert alert-danger" role="alert">
-              <%=message%>
+            <div class='col-sm-5 my-1'>
+              <div class="form-group">
+                <label class='user_profile_label'>Re-Enter-Username</label>
+                <input type="text" name="reenter_username" class="form-control input-op" placeholder="Re-Enter Username" autocomplete="off">
+              </div>
             </div>
-            <% } %>
-
-            <% if(message === 'Username already taken'){ %>
-            <div class="alert alert-danger" role="alert">
-              <%=message%>
-            </div>
-            <% } %>
-
-            <div class="form-group">
-              <label class="label-register" for="formGroupExampleInput2">Email</label>
-              <input type="text" name="email" class="form-control input-op" placeholder="Email" autocomplete="off">
-            </div>
-
-            <% if(message === 'Email already exists'){ %>
-            <div class="alert alert-danger" role="alert">
-              <%=message%>
-            </div>
-            <% } %>
-
-            <div class="form-group">
-              <label class="label-register" for="formGroupExampleInput2">Password</label>
-              <input type="text" name="password" class="form-control input-op" placeholder="Password" autocomplete="off">
-            </div>
-
-            <div class="form-group">
-              <label class="label-register" for="formGroupExampleInput2">Re-Enter-Password</label>
-              <input type="text" name="reenter_password" class="form-control input-op" placeholder="Re-Enter-Password" autocomplete="off">
-            </div>
-
-            <% if(message === 'Passwords does not match.'){ %>
-            <div class="alert alert-danger" role="alert">
-              <%=message%>
-            </div>
-            <% } %>
-
-            <div class="form-group">
-              <label class="label-register" for="formGroupExampleInput2">Account Number</label>
-              <input type="text" name="account_no" class="form-control input-op" placeholder="Account Number" autocomplete="off">
-            </div>
-
-            <% if(message === 'Invalid account no'){ %>
-            <div class="alert alert-danger" role="alert">
-              <%=message%>
-            </div>
-            <% } %>
-
-            <% if(message === 'Entered Account Number already registered!'){ %>
-            <div class="alert alert-danger" role="alert">
-              <%=message%>
-            </div>
-            <% } %>
-
-            <div class="form-group">
-              <label class="label-register" for="formGroupExampleInput">First Name</label>
-              <input type="text" name="first_name" class="form-control input-op" placeholder="First Name" autocomplete="off">
-            </div>
-
-            <div class="form-group">
-              <label class="label-register" for="formGroupExampleInput2">Last Name</label>
-              <input type="text" name="last_name" class="form-control input-op" placeholder="Last Name" autocomplete="off">
-            </div>
-
-            <div class="form-group">
-              <label class="label-register" for="formGroupExampleInput2">Phone Number</label>
-              <input type="text" name="phon_no" class="form-control input-op" placeholder="Phone Number" autocomplete="off">
-            </div>
-
-            <% if(message === 'Phone Number already exists'){ %>
-            <div class="alert alert-danger" role="alert">
-              <%=message%>
-            </div>
-            <% } %>
-
-            <div class="form-group">
-              <label class="label-register" for="formGroupExampleInput2">Address</label>
-              <input type="text" name="address" class="form-control input-op" placeholder="Address" autocomplete="off">
-            </div>
-
-            <div class="form-group">
-              <label class="label-register" for="formGroupExampleInput2">City</label>
-              <input type="text" name="city" class="form-control input-op" placeholder="City" autocomplete="off">
-            </div>
-
-            <div class="form-group">
-              <label class="label-register" for="formGroupExampleInput2">State</label>
-              <input type="text" name="state" class="form-control input-op" placeholder="State" autocomplete="off">
-            </div>
-
-            <div class="form-group">
-              <label class="label-register" for="formGroupExampleInput2">Pincode</label>
-              <input type="text" name="pincode" class="form-control input-op" placeholder="Pincode" autocomplete="off">
-            </div>
-
-            <button type="submit" class="btn btn-primary"> Register </button>
 
           </div>
+
+          <% if(message === 'Usernames does not match.'){ %>
+          <div class="alert alert-danger col-sm-4 my-1" role="alert">
+            <%=message%>
+          </div>
+          <% } %>
+
+          <% if(message === 'Username already taken'){ %>
+          <div class="alert alert-danger col-sm-4 my-1" role="alert">
+            <%=message%>
+          </div>
+          <% } %>
+
+          <div class='row'>
+
+            <div class='col-sm-10 my-1'>
+              <div class="form-group">
+                <label class='user_profile_label'>Email</label>
+                <input type="text" name="email" class="form-control input-op" placeholder="Email" autocomplete="off">
+              </div>
+            </div>
+
+          </div>
+
+          <% if(message === 'Email already exists'){ %>
+          <div class="alert alert-danger col-sm-8 my-1" role="alert">
+            <%=message%>
+          </div>
+          <% } %>
+
+          <div class='row'>
+
+            <div class='col-sm-5 my-1'>
+              <div class="form-group">
+                <label class='user_profile_label'>Password</label>
+                <input type="text" name="password" class="form-control input-op" placeholder="Password" autocomplete="off">
+              </div>
+
+            </div>
+
+            <div class='col-sm-5 my-1'>
+              <div class="form-group">
+                <label class='user_profile_label'>Re-Enter-Password</label>
+                <input type="text" name="reenter_password" class="form-control input-op" placeholder="Re-Enter-Password" autocomplete="off">
+              </div>
+            </div>
+
+          </div>
+
+          <% if(message === 'Passwords does not match.'){ %>
+          <div class="alert alert-danger col-sm-4 my-1" role="alert">
+            <%=message%>
+          </div>
+          <% } %>
+
+          <div class='row'>
+
+            <div class='col-sm-5 my-1'>
+              <div class="form-group">
+                <label class='user_profile_label'>Account Number</label>
+                <input type="text" name="account_no" class="form-control input-op" placeholder="Account Number" autocomplete="off">
+              </div>
+            </div>
+
+            <div class='col-sm-5 my-1'>
+              <div class="form-group">
+                <label class='user_profile_label'>Phone Number</label>
+                <input type="text" name="phon_no" class="form-control input-op" placeholder="Phone Number" autocomplete="off">
+              </div>
+            </div>
+
+          </div>
+
+          <% if(message === 'Invalid account no'){ %>
+          <div class="alert alert-danger col-sm-4 my-1" role="alert">
+            <%=message%>
+          </div>
+          <% } %>
+
+          <% if(message === 'Entered Account Number already registered!'){ %>
+          <div class="alert alert-danger col-sm-4 my-1" role="alert">
+            <%=message%>
+          </div>
+          <% } %>
+
+          <% if(message === 'Phone Number already exists'){ %>
+          <div class="alert alert-danger" role="alert">
+            <%=message%>
+          </div>
+          <% } %>
+
+          <div class='row'>
+
+            <div class='col-sm-5 my-1'>
+              <div class="form-group">
+                <label class='user_profile_label'>First Name</label>
+                <input type="text" name="first_name" class="form-control input-op" placeholder="First Name" autocomplete="off">
+              </div>
+            </div>
+
+            <div class='col-sm-5 my-1'>
+              <div class="form-group">
+                <label class='user_profile_label'>Last Name</label>
+                <input type="text" name="last_name" class="form-control input-op" placeholder="Last Name" autocomplete="off">
+              </div>
+            </div>
+
+          </div>
+
+          <div class='row'>
+
+            <div class='col-sm-10 my-1'>
+              <div class="form-group">
+                <label class='user_profile_label'>Address</label>
+                <input type="text" name="address" class="form-control input-op" placeholder="Address" autocomplete="off">
+              </div>
+            </div>
+
+          </div>
+
+          <div class='row'>
+
+            <div class='col-sm-4 my-1'>
+              <div class="form-group">
+                <label class='user_profile_label'>City</label>
+                <input type="text" name="city" class="form-control input-op" placeholder="City" autocomplete="off">
+              </div>
+            </div>
+
+            <div class='col-sm-4 my-1'>
+              <div class="form-group">
+                <label class='user_profile_label'>State</label>
+                <input type="text" name="state" class="form-control input-op" placeholder="State" autocomplete="off">
+              </div>
+
+            </div>
+
+            <div class='col-sm-2 my-1'>
+
+              <div class="form-group">
+                <label class="label-register" for="formGroupExampleInput2">Pincode</label>
+                <input type="text" name="pincode" class="form-control input-op" placeholder="Pincode" autocomplete="off">
+              </div>
+            </div>
+
+          </div>
+
+          <button type="submit" class="btn btn-primary"> Register </button>
 
         </form>
       </div>
@@ -183,5 +236,9 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 </body>
+	
+<footer class='register_bottom'>
+	  <p class="mt-5 mb-3 text-muted text-center">&copy; 2020-2021</p>
+</footer>
 
 </html>

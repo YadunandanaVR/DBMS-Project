@@ -65,70 +65,111 @@
 
   <div class="container">
 
-    <div class="jumbotron jumbotron_welcome">
+    <div class="jumbotron user_profile_jumbo">
       <div class="container">
-        <h1 class="display-4 login_h1">User Details</h1>
+        <h1 class="display-4 ">User Details</h1>
         <hr class="my-4">
 
         <form action="/userProfileUpdate" method="post" autocomplete="off">
 
-          <div class="col-sm-4">
+          <div class="form-group">
 
-            <div class="form-group">
+            <div class='row'>
 
-              <div class="form-group">
-                <label class="label-register">Username</label>
-                <input type="text" name="username" class="form-control" placeholder="username" autocomplete="off" value="<%= user_data[0].user_name  %>" disabled>
+              <div class='col-sm-4 my-1'>
+                <div class="form-group">
+                  <label class='user_profile_label'>Username</label>
+                  <input type="text" name="username" class="form-control" placeholder="username" autocomplete="off" value="<%= user_data[0].user_name  %>" disabled>
+                </div>
+
               </div>
 
-              <div class="form-group">
-                <label class="label-register">Email</label>
-                <input type="email" name="email" class="form-control" placeholder="Email" value="<%= user_data[0].user_email %>" autocomplete="off" disabled>
+              <div class='col-sm-4 my-1'>
+                <div class="form-group">
+                  <label class='user_profile_label'>Email</label>
+                  <input type="email" name="email" class="form-control" placeholder="Email" value="<%= user_data[0].user_email %>" autocomplete="off" disabled>
+                </div>
               </div>
-
-              <div class="form-group">
-                <label class="label-register">password</label>
-                <input type="text" name="password" class="form-control" placeholder="Password" value="<%= user_data[0].user_password %>" autocomplete="off">
-              </div>
-
-              <div class="form-group">
-                <label class="label-register">First Name</label>
-                <input type="text" name="first_name" class="form-control" placeholder="First Name" value="<%= customer_data[0].customer_fname %>" autocomplete="off">
-              </div>
-
-              <div class="form-group">
-                <label class="label-register">Last Name</label>
-                <input type="text" name="last_name" class="form-control" placeholder="Last Name" value="<%= customer_data[0].customer_lname %>" autocomplete="off">
-              </div>
-
-              <div class="form-group">
-                <label class="label-register">Phone Number</label>
-                <input type="text" name="phon_no" class="form-control" placeholder="Phone Number" value="<%= customer_data[0].customer_phone_number%>" autocomplete="off" disabled>
-              </div>
-
-              <div class="form-group">
-                <label class="label-register">Address</label>
-                <input type="text" name="address" class="form-control" placeholder="Address" value="<%= customer_data[0].customer_address%>" autocomplete="off">
-              </div>
-
-              <div class="form-group">
-                <label class="label-register">City</label>
-                <input type="text" name="city" class="form-control" placeholder="City" value="<%= customer_data[0].customer_city%>" autocomplete="off">
-              </div>
-
-              <div class="form-group">
-                <label class="label-register">State</label>
-                <input type="text" name="state" class="form-control" placeholder="State" value="<%= customer_data[0].customer_state%>" autocomplete="off">
-              </div>
-
-              <div class="form-group">
-                <label class="label-register">Pincode</label>
-                <input type="text" name="pincode" class="form-control" placeholder="Pincode" value="<%= customer_data[0].customer_pincode%>" autocomplete="off">
-              </div>
-
-              <button type="submit" class="btn btn-primary"> Update </button>
 
             </div>
+
+            <div class='row'>
+
+              <div class='col-sm-8'>
+                <div class="form-group">
+                  <label class='user_profile_label'>password</label>
+                  <input type="text" name="password" class="form-control" placeholder="Password" value="<%= user_data[0].user_password %>" autocomplete="off">
+                </div>
+              </div>
+
+            </div>
+
+            <div class='row'>
+
+              <div class='col-sm-4 my-1'>
+                <div class="form-group">
+                  <label class='user_profile_label'>First Name</label>
+                  <input type="text" name="first_name" class="form-control" placeholder="First Name" value="<%= customer_data[0].customer_fname %>" autocomplete="off">
+                </div>
+              </div>
+
+              <div class='col-sm-4 my-1'>
+                <div class="form-group">
+                  <label class='user_profile_label'>Last Name</label>
+                  <input type="text" name="last_name" class="form-control" placeholder="Last Name" value="<%= customer_data[0].customer_lname %>" autocomplete="off">
+                </div>
+              </div>
+
+            </div>
+
+            <div class='row'>
+
+              <div class='col-sm-4 my-1'>
+                <div class="form-group">
+                  <label class='user_profile_label'>Phone Number</label>
+                  <input type="text" name="phon_no" class="form-control" placeholder="Phone Number" value="<%= customer_data[0].customer_phone_number%>" autocomplete="off" disabled>
+                </div>
+              </div>
+
+              <div class='col-sm-4 my-1'>
+                <div class="form-group">
+                  <label class='user_profile_label'>Address</label>
+                  <input type="text" name="address" class="form-control" placeholder="Address" value="<%= customer_data[0].customer_address%>" autocomplete="off">
+                </div>
+              </div>
+
+            </div>
+
+            <div class='row'>
+
+              <div class='col-sm-4 my-1'>
+                <div class="form-group">
+                  <label class='user_profile_label'>City</label>
+                  <input type="text" name="city" class="form-control" placeholder="City" value="<%= customer_data[0].customer_city%>" autocomplete="off">
+                </div>
+              </div>
+
+              <div class='col-sm-4 my-1'>
+                <div class="form-group">
+                  <label class='user_profile_label'>State</label>
+                  <input type="text" name="state" class="form-control" placeholder="State" value="<%= customer_data[0].customer_state%>" autocomplete="off">
+                </div>
+              </div>
+
+            </div>
+
+            <div class='row'>
+
+              <div class='col-sm-4'>
+                <div class="form-group">
+                  <label class='user_profile_label'>Pincode</label>
+                  <input type="text" name="pincode" class="form-control" placeholder="Pincode" value="<%= customer_data[0].customer_pincode%>" autocomplete="off">
+                </div>
+              </div>
+
+            </div>
+            <button type="submit" class="btn btn-primary"> Update </button>
+
           </div>
         </form>
 
