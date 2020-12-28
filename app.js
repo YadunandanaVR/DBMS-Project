@@ -65,6 +65,7 @@ app.post('/userlogin', function(req, res) {
   var password = req.body.password;
   if (username && password) {
     connection.query('SELECT * FROM users WHERE user_name = ? AND user_password = ?', [username, password], function(error, results) {
+      // console.log(results)
       if (results.length > 0) {
         req.session.loggedin = true;
         req.session.username = username;
@@ -545,18 +546,18 @@ app.post('/register', function(req, res) {
           message: 'Username already taken'
         });
       }
-		
-	  if (req.body.username != req.body.reenter_username){
-		  return res.render('register', {
+
+      if (req.body.username != req.body.reenter_username) {
+        return res.render('register', {
           message: 'Usernames does not match.'
         });
-	  }
-		
-	  if (req.body.password != req.body.reenter_password){
-		  return res.render('register', {
+      }
+
+      if (req.body.password != req.body.reenter_password) {
+        return res.render('register', {
           message: 'Passwords does not match.'
         });
-	  }
+      }
 
       connection.query(q1, [req.body.email], function(error, result) {
         if (error) {
@@ -636,27 +637,23 @@ app.get('/userAccountSummary', function(req, res) {
       if (error) throw error;
       var account_number = result[0].user_account_number;
 
-      var q2 = "SELECT account_number, account_holder_fname, account_holder_lname, DATE_FORMAT(account_holder_DOB, '%d-%m-%Y') AS account_holder_DOB, account_holder_address FROM accounts WHERE account_number = ?";
+      var q2 = "SELECT account_number, account_holder_fname, account_holder_lname, DATE_FORMAT(account_holder_DOB, '%d-%m-%Y') AS account_holder_DOB, account_holder_address, electric_board_id FROM accounts WHERE account_number = ?";
 
       connection.query(q2, [account_number], function(error, profileResult) {
+        // console.log(profileResult);
         if (error) throw error;
 
-        var q3 = 'SELECT electric_board_id FROM accounts WHERE account_number = ?';
-        var q4 = 'SELECT electric_board_name FROM electric_boards WHERE electric_board_id = ?';
+        var board_id = profileResult[0].electric_board_id;
+        var q3 = 'SELECT electric_board_name FROM electric_boards WHERE electric_board_id = ?';
 
-        connection.query(q3, [account_number], function(error, accountResult) {
+        connection.query(q3, [board_id], function(error, boardResult) {
           if (error) throw error;
-          var board_id = accountResult[0].electric_board_id;
 
-          connection.query(q4, [board_id], function(error, boardResult) {
-            if (error) throw error;
-
-            res.render('userPages/accountSummary', {
-              message: message,
-              profile: profileResult,
-              boardName: boardResult[0].electric_board_name,
-              username: username
-            });
+          res.render('userPages/accountSummary', {
+            message: message,
+            profile: profileResult,
+            boardName: boardResult[0].electric_board_name,
+            username: username
           });
         });
       });
@@ -668,6 +665,7 @@ app.get('/userAccountSummary', function(req, res) {
   }
 });
 
+
 //  -------------- User Profile Page
 
 app.get('/userProfile', function(req, res) {
@@ -675,25 +673,21 @@ app.get('/userProfile', function(req, res) {
     var message = 'Welcome back, ' + req.session.username + '!';
     var username = req.session.username;
     var q1 = 'SELECT user_account_number FROM users WHERE user_name = ?';
-    var q2 = 'SELECT user_name, user_email, user_password, user_account_number FROM users WHERE user_account_number = ?';
-    var q3 = 'SELECT customer_fname, customer_lname, customer_address, customer_phone_number, customer_city, customer_state, customer_pincode FROM customers WHERE account_number = ?';
+    var q2 = 'SELECT user_name, user_email, user_password, users.user_account_number, customer_fname, customer_lname, customer_address, customer_phone_number, customer_city, customer_state, customer_pincode FROM users INNER JOIN customers  ON users.user_account_number = customers.user_account_number WHERE users.user_account_number = ?;';
+
 
     connection.query(q1, [username], function(error, result) {
       if (error) throw error;
       var account_number = result[0].user_account_number;
 
       connection.query(q2, [account_number], function(error, userResult) {
+        // console.log(userResult);
         if (error) throw error;
 
-        connection.query(q3, [account_number], function(error, customerResult) {
-          if (error) throw error;
-
-          res.render('userPages/userProfile', {
-            message: message,
-            user_data: userResult,
-            customer_data: customerResult,
-            username: username
-          });
+        res.render('userPages/userProfile', {
+          message: message,
+          user_data: userResult,
+          username: username
         });
       });
     });
