@@ -36,7 +36,7 @@ connection.connect(function(error) {
 
 
 app.get('/', function(req, res) {
-  res.render('hi');
+  res.render('Welcome');
 });
 
 
