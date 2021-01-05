@@ -50,6 +50,7 @@
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 
             <a class="dropdown-item" href="/adminSelectAccounts">Accounts</a>
+			<a class="dropdown-item" href="/adminSelectRemovedAccounts">Removed Accounts</a>
             <a class="dropdown-item" href="/adminSelectUsers">Users</a>
             <a class="dropdown-item" href="/adminSelectCustomers">Customers</a>
             <a class="dropdown-item" href="/adminSelectFeedbacks">Feedbacks</a>
@@ -81,7 +82,6 @@
               <th scope="col">State</th>
               <th scope="col">Pincode</th>
               <th scope="col">Account Number</th>
-              <th scope="col">User_account_no</th>
             </tr>
           </thead>
 
@@ -98,7 +98,6 @@
               <td class="admin-select-td"> <%= data.customer_state %> </td>
               <td class="admin-select-td"> <%= data.customer_pincode %> </td>
               <td class="admin-select-td"> <%= data.account_number %> </td>
-              <td class="admin-select-td"> <%= data.user_account_number %> </td>
             </tr>
             <% })%>
 

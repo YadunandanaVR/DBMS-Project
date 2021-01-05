@@ -169,15 +169,14 @@ app.post('/adminAddUsers', function(req, res) {
     account_holder_lname: req.body.lname,
     account_holder_DOB: req.body.dob,
     account_holder_address: req.body.address,
-    electric_board_id: req.body.id
+	electric_board_name : req.body.board_name
   }
 
-  if (req.body.fname == '' || req.body.lname == '' || req.body.dob == '' || req.body.address == '' || req.body.id == '') {
+  if (req.body.fname == '' || req.body.lname == '' || req.body.dob == '' || req.body.address == '' || req.body.board_name == '') {
     res.render('admin/adminAddUser', {
       message: 'No fields should not be left empty!'
     });
   } else {
-
 
     var q1 = 'SELECT account_number FROM accounts WHERE account_number = ?';
     connection.query(q1, [account_number], function(error, account_result) {
@@ -188,9 +187,9 @@ app.post('/adminAddUsers', function(req, res) {
           message: 'Somthing went Wrong please try again!'
         });
       } else {
-        var electric_board_id = Number(req.body.id);
+        var electric_board_name = req.body.board_name;
 
-        if (electric_board_id == 1 || electric_board_id == 2) {
+        if (electric_board_name == 'BESCOM') {
           var q2 = 'INSERT INTO accounts SET ?';
           connection.query(q2, accounts_data, function(error, result) {
             if (error) throw error;
@@ -200,7 +199,7 @@ app.post('/adminAddUsers', function(req, res) {
           });
         } else {
           res.render('admin/adminAddUser', {
-            message: 'Invalid Electric Board ID!'
+            message: 'Invalid Electric Board Name!'
           });
         }
       }
@@ -234,10 +233,10 @@ app.post('/adminUpdateUser', function(req, res) {
     account_holder_lname: req.body.lname,
     account_holder_DOB: req.body.dob,
     account_holder_address: req.body.address,
-    electric_board_id: req.body.id
+    electric_board_name: req.body.board_name
   }
 
-  if (req.body.account_no == '' || req.body.fname == '' || req.body.lname == '' || req.body.dob == '' || req.body.address == '' || req.body.id == '') {
+  if (req.body.account_no == '' || req.body.fname == '' || req.body.lname == '' || req.body.dob == '' || req.body.address == '' || req.body.board_name == '') {
     res.render('admin/adminUpdateUser', {
       message: 'No fields should not be left empty!'
     });
@@ -250,9 +249,9 @@ app.post('/adminUpdateUser', function(req, res) {
 
       if (account_result.length > 0) {
 
-        var electric_board_id = Number(req.body.id);
+        var electric_board_name = req.body.board_name;
 
-        if (electric_board_id == 1 || electric_board_id == 2) {
+        if (electric_board_name == 'BESCOM') {
           var q2 = 'UPDATE accounts SET ? WHERE account_number = ?';
 
           connection.query(q2, [accounts_data, req.body.account_no], function(error, result) {
@@ -264,7 +263,7 @@ app.post('/adminUpdateUser', function(req, res) {
           });
         } else {
           res.render('admin/adminUpdateUser', {
-            message: 'Invalid Electric Board ID!'
+            message: 'Invalid Electric Board Name!'
           });
         }
       } else {
@@ -417,12 +416,35 @@ app.get('/adminSelectAccounts', function(req, res) {
 
   if (req.session.loggedin) {
 
-    var q = "SELECT account_id, account_number, rr_number, account_holder_fname, account_holder_lname, DATE_FORMAT(account_holder_DOB, '%Y-%m-%d') AS account_holder_DOB, account_holder_address, electric_board_id FROM accounts";
+    var q = "SELECT account_id, account_number, rr_number, account_holder_fname, account_holder_lname, DATE_FORMAT(account_holder_DOB, '%Y-%m-%d') AS account_holder_DOB, account_holder_address, electric_board_name FROM accounts";
 
     connection.query(q, function(error, result) {
       if (error) throw error;
       res.render('adminSelect/adminSelectAccounts', {
         accounts_data: result
+      });
+    });
+  } else {
+    res.render('login/adminlogin', {
+      message: 'Please login to view this page!'
+    });
+  }
+});
+
+
+//  ----------------Admin Select Removed accounts
+
+app.get('/adminSelectRemovedAccounts', function(req, res) {
+
+  if (req.session.loggedin) {
+
+    var q = "SELECT account_id, account_number, rr_number, account_holder_fname, account_holder_lname, DATE_FORMAT(account_holder_DOB, '%Y-%m-%d') AS account_holder_DOB, account_holder_address, electric_board_name FROM removed_accounts";
+
+    connection.query(q, function(error, removed_result) {
+      if (error) throw error;
+		
+      res.render('adminSelect/adminSelectRemovedAccounts', {
+        accounts_data: removed_result
       });
     });
   } else {
@@ -637,25 +659,18 @@ app.get('/userAccountSummary', function(req, res) {
       if (error) throw error;
       var account_number = result[0].user_account_number;
 
-      var q2 = "SELECT account_number, account_holder_fname, account_holder_lname, DATE_FORMAT(account_holder_DOB, '%d-%m-%Y') AS account_holder_DOB, account_holder_address, electric_board_id FROM accounts WHERE account_number = ?";
+      var q2 = "SELECT account_number, account_holder_fname, account_holder_lname, DATE_FORMAT(account_holder_DOB, '%d-%m-%Y') AS account_holder_DOB, account_holder_address, electric_board_name FROM accounts WHERE account_number = ?";
 
       connection.query(q2, [account_number], function(error, profileResult) {
         // console.log(profileResult);
         if (error) throw error;
 
-        var board_id = profileResult[0].electric_board_id;
-        var q3 = 'SELECT electric_board_name FROM electric_boards WHERE electric_board_id = ?';
-
-        connection.query(q3, [board_id], function(error, boardResult) {
-          if (error) throw error;
-
           res.render('userPages/accountSummary', {
             message: message,
             profile: profileResult,
-            boardName: boardResult[0].electric_board_name,
             username: username
           });
-        });
+    
       });
     });
   } else {

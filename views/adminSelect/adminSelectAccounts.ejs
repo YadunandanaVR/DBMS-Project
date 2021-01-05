@@ -50,6 +50,7 @@
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 
             <a class="dropdown-item" href="/adminSelectAccounts">Accounts</a>
+			<a class="dropdown-item" href="/adminSelectRemovedAccounts">Removed Accounts</a>
             <a class="dropdown-item" href="/adminSelectUsers">Users</a>
             <a class="dropdown-item" href="/adminSelectCustomers">Customers</a>
             <a class="dropdown-item" href="/adminSelectFeedbacks">Feedbacks</a>
@@ -94,7 +95,7 @@
               <td class="admin-select-td"> <%= data.account_holder_lname %> </td>
               <td class="admin-select-td"> <%= data.account_holder_DOB %> </td>
               <td class="admin-select-td"> <%= data.account_holder_address %> </td>
-              <td class="admin-select-td"> <%= data.electric_board_id %> </td>
+              <td class="admin-select-td"> <%= data.electric_board_name %> </td>
             </tr>
             <% })%>
 
