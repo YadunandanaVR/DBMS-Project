@@ -79,26 +79,16 @@
               <div class='col-sm-4 my-1'>
                 <div class="form-group">
                   <label class='user_profile_label'>Username</label>
-                  <input type="text" name="username" class="form-control" placeholder="username" autocomplete="off" value="<%= user_data[0].user_name  %>" disabled>
+                  <input type="text" name="username" class="form-control" placeholder="username" autocomplete="off" value="<%= user_data[0].customer_username  %>" disabled>
                 </div>
 
               </div>
+
 
               <div class='col-sm-4 my-1'>
                 <div class="form-group">
-                  <label class='user_profile_label'>Email</label>
-                  <input type="email" name="email" class="form-control" placeholder="Email" value="<%= user_data[0].user_email %>" autocomplete="off" disabled>
-                </div>
-              </div>
-
-            </div>
-
-            <div class='row'>
-
-              <div class='col-sm-8'>
-                <div class="form-group">
                   <label class='user_profile_label'>password</label>
-                  <input type="text" name="password" class="form-control" placeholder="Password" value="<%= user_data[0].user_password %>" autocomplete="off">
+                  <input type="text" name="password" class="form-control" placeholder="Password" value="<%= user_data[0].customer_pass %>" autocomplete="off">
                 </div>
               </div>
 

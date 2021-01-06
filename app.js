@@ -64,7 +64,7 @@ app.post('/userlogin', function(req, res) {
   var username = req.body.username;
   var password = req.body.password;
   if (username && password) {
-    connection.query('SELECT * FROM users WHERE user_name = ? AND user_password = ?', [username, password], function(error, results) {
+    connection.query('SELECT * FROM customers WHERE customer_username = ? AND customer_pass = ?', [username, password], function(error, results) {
       // console.log(results)
       if (results.length > 0) {
         req.session.loggedin = true;
@@ -108,7 +108,7 @@ app.post('/adminlogin', function(req, res) {
   var username = req.body.username;
   var password = req.body.password;
   if (username && password) {
-    connection.query('SELECT * FROM admins WHERE admin_user_name = ? AND admin_password = ?', [username, password], function(error, results) {
+    connection.query('SELECT * FROM staffs WHERE staff_username = ? AND staff_pass = ?', [username, password], function(error, results) {
       if (results.length > 0) {
         req.session.loggedin = true;
         req.session.username = username;
@@ -457,23 +457,23 @@ app.get('/adminSelectRemovedAccounts', function(req, res) {
 
 //  -------------  Admin Select Users
 
-app.get('/adminSelectUsers', function(req, res) {
+// app.get('/adminSelectUsers', function(req, res) {
 
-  if (req.session.loggedin) {
-    var q = "SELECT user_id,user_name, user_account_number, user_email, user_password, DATE_FORMAT(created_at, '%d-%m-%Y') AS created_at FROM users";
+//   if (req.session.loggedin) {
+//     var q = "SELECT user_id,user_name, user_account_number, user_email, user_password, DATE_FORMAT(created_at, '%d-%m-%Y') AS created_at FROM users";
 
-    connection.query(q, function(error, result) {
-      if (error) throw error;
-      res.render('adminSelect/adminSelectUsers', {
-        users_data: result
-      });
-    });
-  } else {
-    res.render('login/adminlogin', {
-      message: 'Please login to view this page!'
-    });
-  }
-});
+//     connection.query(q, function(error, result) {
+//       if (error) throw error;
+//       res.render('adminSelect/adminSelectUsers', {
+//         users_data: result
+//       });
+//     });
+//   } else {
+//     res.render('login/adminlogin', {
+//       message: 'Please login to view this page!'
+//     });
+//   }
+// });
 
 //  ---------- Admin Select Customers
 
@@ -527,12 +527,6 @@ app.get('/register', function(req, res) {
 });
 
 app.post('/register', function(req, res) {
-  var users_data = {
-    user_name: req.body.username,
-    user_email: req.body.email,
-    user_password: req.body.password,
-    user_account_number: req.body.account_no
-  }
 
   var customers_data = {
     customer_fname: req.body.first_name,
@@ -542,8 +536,9 @@ app.post('/register', function(req, res) {
     customer_city: req.body.city,
     customer_state: req.body.state,
     customer_pincode: req.body.pincode,
-    account_number: req.body.account_no,
-    user_account_number: req.body.account_no
+	customer_username: req.body.username,
+	customer_pass: req.body.password,
+    account_number: req.body.account_no
   }
 
   if (req.body.first_name == '' || req.body.last_name == '' || req.body.address == '' || req.body.phon_no == '' || req.body.city == '' || req.body.state == '' || req.body.pincode == '' || req.body.account_no == '') {
@@ -552,11 +547,10 @@ app.post('/register', function(req, res) {
     });
   } else {
 
-    var q0 = 'SELECT user_name FROM users WHERE user_name = ?';
-    var q1 = 'SELECT user_email FROM users WHERE user_email = ?';
+    var q0 = 'SELECT customer_username FROM customers WHERE customer_username = ?';
     var q2 = 'SELECT account_number FROM accounts WHERE account_number = ?';
     var q3 = 'SELECT customer_phone_number FROM customers WHERE customer_phone_number = ?';
-    var q4 = 'SELECT user_account_number FROM users WHERE user_account_number = ?';
+    var q4 = 'SELECT account_number FROM customers WHERE account_number = ?';
 
     connection.query(q0, [req.body.username], function(error, result) {
       if (error) {
@@ -580,16 +574,6 @@ app.post('/register', function(req, res) {
           message: 'Passwords does not match.'
         });
       }
-
-      connection.query(q1, [req.body.email], function(error, result) {
-        if (error) {
-          console.log(error);
-        }
-        if (result.length > 0) {
-          return res.render('register', {
-            message: 'Email already exists'
-          });
-        }
 
         connection.query(q2, [req.body.account_no], function(error, result) {
           if (error) {
@@ -620,12 +604,8 @@ app.post('/register', function(req, res) {
                     message: 'Phone Number already exists'
                   });
                 } else {
-                  var q5 = 'INSERT INTO users SET ?';
                   var q6 = 'INSERT INTO customers SET ?';
 
-                  connection.query(q5, users_data, function(error, result) {
-                    if (error) throw error;
-                  });
 
                   connection.query(q6, customers_data, function(error, result) {
                     if (error) throw error;
@@ -639,7 +619,6 @@ app.post('/register', function(req, res) {
             }
           });
         });
-      });
     });
   }
 });
@@ -654,10 +633,10 @@ app.get('/userAccountSummary', function(req, res) {
   if (req.session.loggedin) {
     var message = 'Welcome back, ' + req.session.username + '!';
     var username = req.session.username;
-    var q1 = 'SELECT user_account_number FROM users WHERE user_name = ?';
+    var q1 = 'SELECT account_number FROM customers WHERE customer_username = ?';
     connection.query(q1, [username], function(error, result) {
       if (error) throw error;
-      var account_number = result[0].user_account_number;
+      var account_number = result[0].account_number;
 
       var q2 = "SELECT account_number, account_holder_fname, account_holder_lname, DATE_FORMAT(account_holder_DOB, '%d-%m-%Y') AS account_holder_DOB, account_holder_address, electric_board_name FROM accounts WHERE account_number = ?";
 
@@ -687,13 +666,13 @@ app.get('/userProfile', function(req, res) {
   if (req.session.loggedin) {
     var message = 'Welcome back, ' + req.session.username + '!';
     var username = req.session.username;
-    var q1 = 'SELECT user_account_number FROM users WHERE user_name = ?';
-    var q2 = 'SELECT user_name, user_email, user_password, users.user_account_number, customer_fname, customer_lname, customer_address, customer_phone_number, customer_city, customer_state, customer_pincode FROM users INNER JOIN customers  ON users.user_account_number = customers.user_account_number WHERE users.user_account_number = ?;';
+    var q1 = 'SELECT account_number FROM customers WHERE customer_username = ?';
+    var q2 = 'SELECT customer_username, customer_pass, account_number, customer_fname, customer_lname, customer_address, customer_phone_number, customer_city, customer_state, customer_pincode FROM customers WHERE account_number = ?;';
 
 
     connection.query(q1, [username], function(error, result) {
       if (error) throw error;
-      var account_number = result[0].user_account_number;
+      var account_number = result[0].account_number;
 
       connection.query(q2, [account_number], function(error, userResult) {
         // console.log(userResult);
@@ -716,9 +695,6 @@ app.get('/userProfile', function(req, res) {
 app.post('/userProfileUpdate', function(req, res) {
   if (req.session.loggedin) {
 
-    var user_edited_data = {
-      user_password: req.body.password
-    }
 
     var customer_edited_data = {
       customer_fname: req.body.first_name,
@@ -726,21 +702,18 @@ app.post('/userProfileUpdate', function(req, res) {
       customer_address: req.body.address,
       customer_city: req.body.city,
       customer_state: req.body.state,
-      customer_pincode: req.body.pincode
+      customer_pincode: req.body.pincode,
+	  customer_pass: req.body.password
     }
 
     var username = req.session.username;
-    var q1 = 'UPDATE users SET ? WHERE user_name = ?';
-    var q2 = 'SELECT user_account_number FROM users WHERE user_name = ?';
-    var q3 = 'UPDATE customers SET ? WHERE user_account_number =?';
+    var q2 = 'SELECT account_number FROM customers WHERE customer_username = ?';
+    var q3 = 'UPDATE customers SET ? WHERE account_number =?';
 
-
-    connection.query(q1, [user_edited_data, username], function(error, userResult) {
-      if (error) throw error;
 
       connection.query(q2, [username], function(error, accountNoResult) {
         if (error) throw error;
-        var account_number = accountNoResult[0].user_account_number;
+        var account_number = accountNoResult[0].account_number;
 
         connection.query(q3, [customer_edited_data, account_number], function(error, customerResult) {
           if (error) throw error;
@@ -748,7 +721,6 @@ app.post('/userProfileUpdate', function(req, res) {
           res.redirect('/userProfile');
         });
       });
-    });
   } else {
     res.render('login/login', {
       message: 'Please login to view this page!'
@@ -762,11 +734,11 @@ app.get('/userViewBill', function(req, res) {
   if (req.session.loggedin) {
     var username = req.session.username;
 
-    var q0 = 'SELECT user_account_number FROM users WHERE user_name = ?';
+    var q0 = 'SELECT account_number FROM customers WHERE customer_username = ?';
 
     connection.query(q0, [username], function(error, accountResult) {
       if (error) throw error;
-      var account_number = accountResult[0].user_account_number;
+      var account_number = accountResult[0].account_number;
 
       var q1 = 'SELECT bill_no FROM bills WHERE account_number = ?';
 
@@ -804,11 +776,11 @@ app.post('/userViewBill', function(req, res) {
   if (req.session.loggedin) {
 
     var username = req.session.username;
-    var q0 = 'SELECT user_account_number FROM users WHERE user_name = ?';
+    var q0 = 'SELECT account_number FROM customers WHERE customer_username = ?';
 
     connection.query(q0, [username], function(error, account_result) {
       if (error) throw error;
-      var account_number = account_result[0].user_account_number;
+      var account_number = account_result[0].account_number;
 
       var q1 = 'SELECT bill_no FROM bills WHERE account_number = ? HAVING bill_no = ?';
 
@@ -880,11 +852,11 @@ app.get('/userBillingHistory', function(req, res) {
     var message = 'Welcome back, ' + req.session.username + '!';
 
     var username = req.session.username;
-    var q0 = 'SELECT user_account_number FROM users WHERE user_name = ?'
+    var q0 = 'SELECT account_number FROM customers WHERE customer_username = ?'
 
     connection.query(q0, [username], function(error, accountResult) {
       if (error) throw error;
-      var account_number = accountResult[0].user_account_number;
+      var account_number = accountResult[0].account_number;
 
       var q1 = 'SELECT bill_no FROM bills WHERE account_number = ?';
 
@@ -942,13 +914,12 @@ app.post('/userFeedback', function(req, res) {
   if (req.session.loggedin) {
     var username = req.session.username;
 
-    var q1 = 'SELECT user_account_number FROM users WHERE user_name = ?';
+    var q1 = 'SELECT account_number FROM customers WHERE customer_username = ?';
     connection.query(q1, [username], function(error, result) {
       if (error) throw error;
-      var account_number = result[0].user_account_number;
+      var account_number = result[0].account_number;
 
       var feedback_data = {
-        customer_name: req.body.name,
         feedback_desc: req.body.feedback,
         account_number: account_number
       }
