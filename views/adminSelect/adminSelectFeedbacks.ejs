@@ -50,7 +50,6 @@
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 
             <a class="dropdown-item" href="/adminSelectAccounts">Accounts</a>
-			<a class="dropdown-item" href="/adminSelectRemovedAccounts">Removed Accounts</a>
             <a class="dropdown-item" href="/adminSelectCustomers">Customers</a>
             <a class="dropdown-item" href="/adminSelectFeedbacks">Feedbacks</a>
 
@@ -72,9 +71,9 @@
         <table class="table table-responsive table-bordered table-hover">
           <thead class="thead-dark">
             <tr>
-              <th scope="col">Feedback_id</th>
+              <th scope="col">Feedback ID</th>
               <th scope="col">Feedback</th>
-              <th scope="col">Account Number</th>
+              <th scope="col">Customer ID</th>
             </tr>
           </thead>
 
@@ -84,7 +83,7 @@
             <tr>
               <td class="admin-select-td" style="width: 25%;"> <%= data.feedback_id %> </td>
               <td class="admin-select-td" style="width: 60%;"> <%= data.feedback_desc %> </td>
-              <td class="admin-select-td"> <%= data.account_number %> </td>
+              <td class="admin-select-td" style="width: 10%;"> <%= data.customer_id %> </td>
             </tr>
             <% })%>
 

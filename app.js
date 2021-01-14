@@ -434,25 +434,25 @@ app.get('/adminSelectAccounts', function(req, res) {
 
 //  ----------------Admin Select Removed accounts
 
-app.get('/adminSelectRemovedAccounts', function(req, res) {
+// app.get('/adminSelectRemovedAccounts', function(req, res) {
 
-  if (req.session.loggedin) {
+//   if (req.session.loggedin) {
 
-    var q = "SELECT account_id, account_number, rr_number, account_holder_fname, account_holder_lname, DATE_FORMAT(account_holder_DOB, '%Y-%m-%d') AS account_holder_DOB, account_holder_address, electric_board_name FROM removed_accounts";
+//     var q = "SELECT account_id, account_number, rr_number, account_holder_fname, account_holder_lname, DATE_FORMAT(account_holder_DOB, '%Y-%m-%d') AS account_holder_DOB, account_holder_address, electric_board_name FROM removed_accounts";
 
-    connection.query(q, function(error, removed_result) {
-      if (error) throw error;
+//     connection.query(q, function(error, removed_result) {
+//       if (error) throw error;
 		
-      res.render('adminSelect/adminSelectRemovedAccounts', {
-        accounts_data: removed_result
-      });
-    });
-  } else {
-    res.render('login/adminlogin', {
-      message: 'Please login to view this page!'
-    });
-  }
-});
+//       res.render('adminSelect/adminSelectRemovedAccounts', {
+//         accounts_data: removed_result
+//       });
+//     });
+//   } else {
+//     res.render('login/adminlogin', {
+//       message: 'Please login to view this page!'
+//     });
+//   }
+// });
 
 
 //  -------------  Admin Select Users
@@ -914,14 +914,14 @@ app.post('/userFeedback', function(req, res) {
   if (req.session.loggedin) {
     var username = req.session.username;
 
-    var q1 = 'SELECT account_number FROM customers WHERE customer_username = ?';
+    var q1 = 'SELECT customer_id FROM customers WHERE customer_username = ?';
     connection.query(q1, [username], function(error, result) {
       if (error) throw error;
-      var account_number = result[0].account_number;
+      var customer_id = result[0].customer_id;
 
       var feedback_data = {
         feedback_desc: req.body.feedback,
-        account_number: account_number
+        customer_id : customer_id
       }
 
       var q2 = 'INSERT INTO feedbacks SET ?';
